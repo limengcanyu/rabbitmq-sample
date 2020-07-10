@@ -90,6 +90,9 @@ public class PublisherConfirms {
             String queue = UUID.randomUUID().toString();
             ch.queueDeclare(queue, false, false, true, null);
 
+            // Enabling Publisher Confirms on a Channel
+            // This method must be called on every channel that you expect to use publisher confirms.
+            // Confirms should be enabled just once, not for every message published.
             ch.confirmSelect();
 
             ConcurrentNavigableMap<Long, String> outstandingConfirms = new ConcurrentSkipListMap<>();
