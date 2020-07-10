@@ -23,14 +23,23 @@ public class ReceiveLogsDirect {
         channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
         String queueName = channel.queueDeclare().getQueue();
 
-        if (argv.length < 1) {
-            System.err.println("Usage: ReceiveLogsDirect [info] [warning] [error]");
-            System.exit(1);
-        }
+//        if (argv.length < 1) {
+//            System.err.println("Usage: ReceiveLogsDirect [info] [warning] [error]");
+//            System.exit(1);
+//        }
+//
+//        for (String severity : argv) {
+//            channel.queueBind(queueName, EXCHANGE_NAME, severity);
+//        }
 
-        for (String severity : argv) {
-            channel.queueBind(queueName, EXCHANGE_NAME, severity);
-        }
+        // see all the log messages
+        String severity1 = "info";
+        String severity2 = "warning";
+        String severity3 = "error";
+        channel.queueBind(queueName, EXCHANGE_NAME, severity1);
+        channel.queueBind(queueName, EXCHANGE_NAME, severity2);
+        channel.queueBind(queueName, EXCHANGE_NAME, severity3);
+
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {

@@ -24,8 +24,14 @@ public class EmitLogDirect {
              Channel channel = connection.createChannel()) {
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
 
-            String severity = getSeverity(argv);
-            String message = getMessage(argv);
+//            String severity = getSeverity(argv);
+//            String message = getMessage(argv);
+
+            // emit an error log message
+            String severity = "info";
+//            String severity = "warning";
+//            String severity = "error";
+            String message = "Run. Run. Or it will explode.";
 
             channel.basicPublish(EXCHANGE_NAME, severity, null, message.getBytes(StandardCharsets.UTF_8));
             System.out.println(" [x] Sent '" + severity + "':'" + message + "'");
